@@ -151,17 +151,18 @@
                 </div>
 
                 <div class="my-orders-div center hidden" id="my-orders-div">
-                <?php foreach ($userOrders as $order) { ?>
-                <?php $restaurantName = Restaurant::getRestaurantName($db, intval($order->idRestaurant)); ?>
-                <div class="user-order">
-                    <p>Order <?=$order->id?> (<?=$order->submissonDate?> | <?=$order->submissonHour?>)</p>
-                    <p><?=$restaurantName?></p>
+                    <?php foreach ($userOrders as $order) { ?>
+                        <?php $restaurantName = Restaurant::getRestaurantName($db, intval($order->idRestaurant)); ?>
+                        <div class="user-order">
+                            <p>Order <?=$order->id?> (<?=$order->submissonDate?> | <?=$order->submissonHour?>)</p>
+                            <p><?=$restaurantName?></p>
+                        </div>
+                    <?php } ?>
                 </div>
-            <?php }
-            if (sizeof($userOrders) == 0) { ?>
+            <?php if (sizeof($userOrders) == 0) { ?>
                 <p>No orders available!</p>
             <?php } ?>
-        </div>
+                </div>
 
         <div class="my-favorites-div center hidden" id="my-favorites-div">
             <div class="name">
