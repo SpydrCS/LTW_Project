@@ -239,9 +239,8 @@
                 $subHour = $order->submissonHour;
                 ?>
                 <div class="user-order">
-                    <p>Restaurant: <?php echo $restaurantName?>
-                    Client: <?php echo $clientName?></p>
-                    <p>Address: <?=Restaurant::getRestaurant($db,$order->idRestaurant)->address ?></p>
+                    <p>Restaurant: <?=$restaurantName?> Client: <?php echo $clientName?></p>
+                    <p>Address: <?=Restaurant::getRestaurant($db,$order->idRestaurant)->address ?> State: <?=$state?></p>
                 </div>
             <?php }} 
             if (sizeof($ownerOrders) == 0) { ?>
