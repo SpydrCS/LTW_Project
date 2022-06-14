@@ -136,13 +136,6 @@
                                 VALUES ( ? , ? , ? , ?)"
                                 );
             $stmt->execute(array($idUser,$name,$address,$type));
-        }
-
-        // static function getRestaurantComments(PDO $db, int $id) {
-        //     $stmt = $db->prepare('SELECT select Pedido.idRestaurant, Review.idPedido, Review.comment, Review.submissonDate, Review.submissonHour, Review.grade, Review.answer from Review,Pedido
-        //                         where (Review.idPedido=Pedido.id AND Pedido.idRestaurant=?)');
-            
-            $stmt->execute();
             $comments = array();
 
             while ($comment = $stmt->fetch()) {
