@@ -73,5 +73,46 @@
                 $User['submissonHour']
             );
         }
+
+        static function getOrdersByOwner(PDO $db, int $id) : array {
+            $stmt = $db->prepare("SELECT DISTINCT Pedido.id, Restaurant.id as idRestaurant, Restaurant.idUser as idOwner, Pedido.idUser, Pedido.state, Pedido.delieverAddress, Pedido.submissonDate, Pedido.submissonHour FROM Pedido, Restaurant WHERE (Pedido.idRestaurant=idOwner and idOwner=" . $id .")");
+            $stmt->execute(); 
+            $orders = array();
+            
+            while ($order = $stmt->fetch()) {
+                $orders[] = new Pedido(
+                    intval($order['id']),
+                    intval($order['idRestaurant']),
+                    intval($order['idUser']),
+                    $order['state'],
+                    $order['delieverAddress'],
+                    $order['submissonDate'],
+                    $order['submissonHour']
+                );
+            }
+
+            return $orders;
+        }
+
+
+        static function getAllOrders(PDO $db) : array {
+            $stmt = $db->prepare('SELECT * FROM Pedido');
+            $stmt->execute();
+            $orders = array();
+            
+            while ($order = $stmt->fetch()) {
+                $orders[] = new Pedido(
+                    intval($order['id']),
+                    intval($order['idRestaurant']),
+                    intval($order['idUser']),
+                    $order['state'],
+                    $order['delieverAddress'],
+                    $order['submissonDate'],
+                    $order['submissonHour']
+                );
+            }
+
+            return $orders;
+        }
     }
 ?>

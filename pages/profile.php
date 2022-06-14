@@ -24,11 +24,12 @@
   $user = User::getUser($db, intval($userId));
   $userAddresses = Address::getUserAddresses($db, intval($userId));
   $userOrders = Pedido::getUserOrders($db, intval($userId));
+  $ownerOrders = Pedido::getOrdersByOwner($db,intval($userId));
   $favoriteUserRestaurants = Favorite::getUserFavoriteRestaurants($db, intval($userId));
   $ownedRestaurants = Restaurant::getProperRestaurants($db,intval($userId));
 
   drawHeader($session);
   drawTitles($db, $user);
-  drawMyProfile($db, $user, $userAddresses, $userOrders, $favoriteUserRestaurants, $ownedRestaurants, intval($error));
+  drawMyProfile($db, $user, $userAddresses, $userOrders, $ownerOrders, $favoriteUserRestaurants, $ownedRestaurants, intval($error));
   drawFooter();
 ?>
