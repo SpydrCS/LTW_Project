@@ -175,25 +175,28 @@
         <div class="my-restaurants-div center hidden" id="my-restaurants-div">
             <div class="name">
             <?php foreach ($ownedRestaurants as $restaurant) { ?>
-                <?php $restaurantName = Restaurant::getRestaurantName($db, intval($restaurant->idRestaurant)); ?>
+                <?php $restaurantName = Restaurant::getRestaurantName($db, intval($restaurant->id)); ?>
                 <div class="user-order">
                     <p>Name: <?=$restaurantName?></p>
+                    <p>Type: <?=$restaurant->type?></p>
+                    <p>Address: <?=$restaurant->address?></p>
                 </div>
-                <?php }
-                if (sizeof($favoriteRestaurants) == 0) { ?>
-                    <p>No restaurants owned.</p>
+            <?php } 
+            if (sizeof($ownedRestaurants) == 0) { ?>
+                <p>No restaurants owned!</p>
             <?php } ?>
             </div>
         </div>
         <div class="add-restaurants-div center hidden" id="add-restaurants-div">
             <div class="name">
-                <form action=<?="../actions/action_add_new_restaurant.php"?> method="post">
-                    <p><label for="restaurant-name">Insert your restaurant name:</label></p>
-                    <input type="text" placeholder="Name" name="new-restaurant" class="diactivated"></p>
-                    <p><label for="restaurant-address">Insert the restaurant's address:</label></p>
-                    <input type="text" placeholder="Address" name="new-restaurant" class="diactivated"></p>
-                    <p><label for="restaurant-type">Choose the restaurant specialty:</label></p>
-                    <select id="type" name = "type">
+
+                <form action="../actions/action_add_new_restaurant.php" method="post">
+                    <p><label for="name">Insert your restaurant name:</label></p>
+                    <input type="text" placeholder="name" name="name" class="diactivated"></p>
+                    <p><label for="address">Insert the restaurant's address:</label></p>
+                    <input type="text" placeholder="address" name="address" class="diactivated"></p>
+                    <p><label for="type">Choose the restaurant specialty:</label></p>
+                    <select id="type" name="type">
                         <option value="burgers">Burgers</option>
                         <option value="pizza">Pizza</option>
                         <option value="sandwiches">Sandwiches</option>
@@ -209,6 +212,12 @@
                     </select>
                     <button type="submit" class="btn-save-changes">Save changes</button>
                 </form>
+                <?php if ($error == 3) { ?>
+                    <p>Resturant added succesfully!</p>
+                <?php }
+                else if ($error == -2) { ?>
+                    <p>Please fill all the cells!</p>
+                <?php }?>
             </div>
         </div>
             <?php } ?>

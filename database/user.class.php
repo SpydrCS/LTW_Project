@@ -117,5 +117,11 @@
 
             return $client['client'];
         }
+
+        static function addNewRestaurant(PDO $db, int $idUser, string $name, string $address, string $type) {
+            $stmt = $db->prepare("INSERT INTO Restaurant (idUser, name, address, type) 
+                                VALUES ( ? , ? , ? , ? )");
+            $stmt->execute(array($idUser, $name, $address, $type));
+        }
     }
 ?>

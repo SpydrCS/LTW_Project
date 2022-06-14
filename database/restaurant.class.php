@@ -129,8 +129,8 @@
 
         static function addRestaurant(PDO $db, int $idUser, string $name, string $address, string $type) {
             $stmt = $db->prepare("INSERT INTO Restaurant ('idUser', 'name', 'address', 'type') 
-            VALUES ( ? , ? , ? , ?)"
-            );
+                                VALUES ( ? , ? , ? , ?)"
+                                );
             $stmt->execute(array($idUser,$name,$address,$type));
         }
 
