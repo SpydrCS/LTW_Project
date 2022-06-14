@@ -17,14 +17,17 @@
 
     $user = User::getUser($db, intval($session->getId()));
 
-    if ($user && $_POST['oldPassword'] == $user->password) { // All good ($error = 0)
+    if ($user && md5($_POST['oldPassword']) == $user->password) { // All good ($error = 0)
         if($_POST['name'] != '') $user->name = $_POST['name'];
         if($_POST['username'] != '') {
             $user->username = $_POST['username'];
             $session->setName($_POST['username']);
         }
         if($_POST['phone'] != '') $user->phone = intval($_POST['phone']);
-        if($_POST['newPassword' != '']) $user->password = $_POST['newPassword'];
+        if($_POST['newPassword' != '']) {
+            $user->password = md5($_POST['newPassword']);
+            $session->setPassword(md5($_POST['newPassword']));
+        }
         $user->save($db);
         
         header('Location: ../pages/profile.php?userId=' . $user->id . '&error=0');
