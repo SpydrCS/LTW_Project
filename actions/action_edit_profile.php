@@ -24,10 +24,7 @@
             $session->setName($_POST['username']);
         }
         if($_POST['phone'] != '') $user->phone = intval($_POST['phone']);
-        if($_POST['newPassword' != '']) {
-            $user->password = md5($_POST['newPassword']);
-            $session->setPassword(md5($_POST['newPassword']));
-        }
+        if($_POST['newPassword' != '']) $user->password = md5($_POST['newPassword']);
         $user->save($db);
         
         header('Location: ../pages/profile.php?userId=' . $user->id . '&error=0');

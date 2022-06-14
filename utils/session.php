@@ -33,10 +33,6 @@
       $_SESSION['name'] = $name;
     }
 
-    public function setPassword(string $password) {
-      $_SESSION['password'] = $password;
-    }
-
     public function addMessage(string $type, string $text) {
       $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
     }

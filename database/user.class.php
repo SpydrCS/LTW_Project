@@ -90,12 +90,14 @@
         }
 
         function save($db) {
+            //password change não está a trocar
             $stmt = $db->prepare('UPDATE User SET name = ?,
                                  username = ?,
-                                 phone = ?
+                                 phone = ?/*,
+                                 password = ?*/ 
                                 WHERE id = ?');
       
-            $stmt->execute(array($this->name, $this->username, $this->phone, $this->id));
+            $stmt->execute(array($this->name, $this->username, $this->phone, /*$this->$password,*/ $this->id));
         }
 
         static function saveAddress(PDO $db, int $id, string $newAddress) {
