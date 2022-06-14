@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS Plate;
 DROP TABLE IF EXISTS Addresses;
 DROP TABLE IF EXISTS Favorites;
+DROP TABLE IF EXISTS Orders;
 
 /* CREATE TABLES */
 
@@ -83,7 +84,7 @@ CREATE TABLE Orders(
 
 INSERT INTO User ('username','profilePic','password','name','age','nif','phone','address','client')
 VALUES
-  ("DentonPitts", "../images/profilePic.png","@v{6Tr(~Rj","Denton Pitts",61,"368678646","253155521","sit.ametee@icloud.net",0),
+  ("DentonPitts", "../images/profilePic.png","dc8c089ce2afdb2ec82f0d12dd148581","Denton Pitts",61,"368678646","253155521","sit.ametee@icloud.net",0),
   ("AspenWalters", "../images/profilePic.png","#8E=TC6+tC","Aspen Walters",72,"374287783","475788662","amet.ultriciess.sem@yahoo.org",0),
   ("JamesonGreene", "../images/profilePic.png","-36Z?paU-(","Jameson Greene",68,"349435629","285844453","nuncc@icloud.edu",0),
   ("ImaCarpenter", "../images/profilePic.png","YN9K.p'der","Ima Carpenter",18,"316523367","138734174","eratt@icloud.net",0),
