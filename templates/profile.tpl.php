@@ -6,7 +6,7 @@
     require_once(__DIR__ . '/../database/restaurant.class.php');
 ?>
 
-<?php function drawTitles() { ?>
+<?php function drawTitles(PDO $db, User $user) { ?>
     <div class="max">
         <div class="main-titles">
             <a href="javascript:void(0)" onclick="new_func(1)">
@@ -15,35 +15,34 @@
                     <button type="button" class="ttl-btn" id="prof-btn" onclick="new_func(1)">My Profile</button>
                 </div>
             </a>
-            <?php if (1 == 1) { ?> <!-- User is a client -->
+            <?php if ($user->client == 1) { ?> <!-- User is a client -->
                 <a href="javascript:void(0)" onclick="new_func(2)">
                     <div class="my-addresses flex">
                         <i class="material-icons">place</i>
                         <button type="button" class="ttl-btn" id="addr-btn" onclick="new_func(2)">My Adresses</button>
                     </div>
                 </a>
-            <?php }
-            else { ?>
-                <a href="javascript:void(0)" onclick="new_func(2)">
-                    <div class="my-addresses flex">
-                        <i class="material-icons">building</i>
-                        <button type="button" class="ttl-btn" id="addr-btn" onclick="new_func(2)">My Restaurats</button>
-                    </div>
-                </a>
-            <?php } ?>
-                
-            <a href="javascript:void(0)" onclick="new_func(3)">
+                <a href="javascript:void(0)" onclick="new_func(3)">
                 <div class="my-orders flex">
                     <i class="material-icons">business_center</i>
                     <button type="button" class="ttl-btn" id="order-btn" onclick="new_func(3)">My Orders</button>
                 </div>
-            </a>
+                </a>
             <a href="javascript:void(0)" onclick="new_func(4)">
                 <div class="my-favorites flex">
                     <i class="material-icons">star</i>
                     <button type="button" class="ttl-btn" id="fav-btn" onclick="new_func(4)">My Favorites</button>
                 </div>
             </a>
+            <?php }
+            else { ?>
+                <a href="javascript:void(0)" onclick="new_func(2)">
+                    <div class="my-addresses flex">
+                        <i class="material-icons">building</i>
+                        <button type="button" class="ttl-btn" id="rest-btn" onclick="new_func(2)">My Restaurants</button>
+                    </div>
+                </a>
+            <?php } ?>
         </div>
 <?php } ?>
 
@@ -56,7 +55,7 @@
     $userNIF = $user->nif;
     $userPhone = $user->phone;
     $userAddress = $user->address;
-    //$client = $user->client;
+    $client = $user->client;
 
     ?>
         <div class="my-profile-div center show" id="my-profile-div">
@@ -96,8 +95,7 @@
             </div>
         </div>
         <?php 
-            $user = User::getUser($db, $user->id);
-            if (1 == 1) { ?> <!-- User it's a client -->
+            if ($client == 1) { ?> <!-- User it's a client -->
                 <div class="my-addresses-div center hidden" id="my-addresses-div">
                     <div class="both">
                         <div class="new-address-div">
@@ -139,13 +137,9 @@
                         </div>
                     </div>
                 </div>
-            <?php }
-            else { ?> <!-- User it's not a client (owner) -->
-                
-            <?php } ?>
 
-        <div class="my-orders-div center hidden" id="my-orders-div">
-            <?php foreach ($userOrders as $order) { ?>
+                <div class="my-orders-div center hidden" id="my-orders-div">
+                <?php foreach ($userOrders as $order) { ?>
                 <?php $restaurantName = Restaurant::getRestaurantName($db, intval($order->idRestaurant)); ?>
                 <div class="user-order">
                     <p>Order <?=$order->id?> (<?=$order->submissonDate?> | <?=$order->submissonHour?>)</p>
@@ -171,5 +165,21 @@
             </div>
         </div>
     </div>
+            <?php }
+            else { ?> <!-- User it's not a client (owner) -->
+                <div class="my-restaurants-div center hidden" id="my-restaurants-div">
+            <div class="name">
+            <?php foreach ($restaurants as $restaurant) { ?>
+                <?php $restaurantName = Restaurant::getRestaurantName($db, intval($favorite->idRestaurant)); ?>
+                <div class="user-order">
+                    <p>Name: <?=$restaurantName?></p>
+                </div>
+            <?php }
+            if (sizeof($favoriteRestaurants) == 0) { ?>
+                <p>No plates in favorites, yet!</p>
+            <?php } ?>
+            </div>
+        </div>
+            <?php } ?>
     <?php $error = 0; ?>
 <?php } ?>

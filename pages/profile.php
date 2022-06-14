@@ -27,7 +27,7 @@
   $favoriteUserRestaurants = Favorite::getUserFavoriteRestaurants($db, intval($userId));
 
   drawHeader($session);
-  drawTitles();
+  drawTitles($db, $user);
   drawMyProfile($db, $user, $userAddresses, $userOrders, $favoriteUserRestaurants, intval($error));
   drawFooter();
 ?>
