@@ -37,22 +37,28 @@
             <?php }
             else { ?>
                 <a href="javascript:void(0)" onclick="new_func(2,0)">
-                    <div class="my-addresses flex">
+                    <div class="my-restaurants flex">
                         <i class="material-icons">building</i>
                         <button type="button" class="ttl-btn" id="rest-btn" onclick="new_func(2,0)">My Restaurants</button>
                     </div>
                 </a>
                 <a href="javascript:void(0)" onclick="new_func(3,0)">
-                    <div class="my-addresses flex">
+                    <div class="add-restaurants flex">
                         <i class="material-icons">building</i>
                         <button type="button" class="ttl-btn" id="add-rest-btn" onclick="new_func(2,0)">New Restaurant</button>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="new_func(4,0)">
+                    <div class="my-orders flex">
+                        <i class="material-icons">building</i>
+                        <button type="button" class="ttl-btn" id="ord-btn" onclick="new_func(2,0)">My Orders</button>
                     </div>
                 </a>
             <?php } ?>
         </div>
 <?php } ?>
 
-<?php function drawMyProfile(PDO $db, User $user, array $userAddresses, array $userOrders, array $favoriteRestaurants, array $ownedRestaurants, int $error) {
+<?php function drawMyProfile(PDO $db, User $user, array $userAddresses, array $userOrders, array $ownerOrders, array $favoriteRestaurants, array $ownedRestaurants, int $error) {
     $userProfilePic = $user->profilePic;
     $userUsername = $user->username;
     $userPassword = $user->password;
@@ -218,6 +224,29 @@
                 else if ($error == -2) { ?>
                     <p>Please fill all the cells!</p>
                 <?php }?>
+            </div>
+        </div>
+        <div class="my-orders-div center hidden" id="my-orders-div">
+            <div class="name">
+            <?php
+             foreach ($ownerOrders as $order) { 
+                if(Restaurant::getRestaurant($db,$order->idRestaurant)->idUser == $user->id){
+                $restaurantName = Restaurant::getRestaurant($db,$order->idRestaurant)->name;
+                $clientName = User::getUser($db,$order->idUser)->name;
+                $state = $order->state;
+                $subDate = $order->submissonDate;
+                $subHour = $order->submissonHour;
+                ?>
+                <div class="user-order">
+                    <p>Restaurant: <?php echo $restaurantName?></p>
+                    <p>Client: <?php echo $clientName?></p>
+                    <p>Submitted at <?php echo $subHour." ".$subDate?></p>
+                    <p>Address: <? echo $restaurant->address ?></p>
+                </div>
+            <?php }} 
+            if (sizeof($ownerOrders) == 0) { ?>
+                <p>No orders for now...</p>
+            <?php } ?>
             </div>
         </div>
             <?php } ?>
