@@ -16,37 +16,37 @@
                 </div>
             </a>
             <?php if ($user->client == 1) { ?> <!-- User is a client -->
-                <a href="javascript:void(0)" onclick="new_func(2)">
+                <a href="javascript:void(0)" onclick="new_func(2,1)">
                     <div class="my-addresses flex">
                         <i class="material-icons">place</i>
-                        <button type="button" class="ttl-btn" id="addr-btn" onclick="new_func(2)">My Adresses</button>
+                        <button type="button" class="ttl-btn" id="addr-btn" onclick="new_func(2,1)">My Adresses</button>
                     </div>
                 </a>
-                <a href="javascript:void(0)" onclick="new_func(3)">
+                <a href="javascript:void(0)" onclick="new_func(3,1)">
                 <div class="my-orders flex">
                     <i class="material-icons">business_center</i>
-                    <button type="button" class="ttl-btn" id="order-btn" onclick="new_func(3)">My Orders</button>
+                    <button type="button" class="ttl-btn" id="order-btn" onclick="new_func(3,1)">My Orders</button>
                 </div>
                 </a>
-            <a href="javascript:void(0)" onclick="new_func(4)">
+            <a href="javascript:void(0)" onclick="new_func(4,1)">
                 <div class="my-favorites flex">
                     <i class="material-icons">star</i>
-                    <button type="button" class="ttl-btn" id="fav-btn" onclick="new_func(4)">My Favorites</button>
+                    <button type="button" class="ttl-btn" id="fav-btn" onclick="new_func(4,1)">My Favorites</button>
                 </div>
             </a>
             <?php }
             else { ?>
-                <a href="javascript:void(0)" onclick="new_func(2)">
+                <a href="javascript:void(0)" onclick="new_func(2,0)">
                     <div class="my-addresses flex">
                         <i class="material-icons">building</i>
-                        <button type="button" class="ttl-btn" id="rest-btn" onclick="new_func(2)">My Restaurants</button>
+                        <button type="button" class="ttl-btn" id="rest-btn" onclick="new_func(2,0)">My Restaurants</button>
                     </div>
                 </a>
             <?php } ?>
         </div>
 <?php } ?>
 
-<?php function drawMyProfile(PDO $db, User $user, array $userAddresses, array $userOrders, array $favoriteRestaurants, int $error) {
+<?php function drawMyProfile(PDO $db, User $user, array $userAddresses, array $userOrders, array $favoriteRestaurants, array $ownedRestaurants, int $error) {
     $userProfilePic = $user->profilePic;
     $userUsername = $user->username;
     $userPassword = $user->password;
@@ -164,22 +164,22 @@
             <?php } ?>
             </div>
         </div>
-    </div>
             <?php }
-            else { ?> <!-- User it's not a client (owner) -->
-                <div class="my-restaurants-div center hidden" id="my-restaurants-div">
+        else { ?> <!-- User it's not a client (owner) -->
+        <div class="my-restaurants-div center hidden" id="my-restaurants-div">
             <div class="name">
-            <?php foreach ($restaurants as $restaurant) { ?>
-                <?php $restaurantName = Restaurant::getRestaurantName($db, intval($favorite->idRestaurant)); ?>
+            <?php foreach ($ownedRestaurants as $restaurant) { ?>
+                <?php $restaurantName = Restaurant::getRestaurantName($db, intval($restaurant->idRestaurant)); ?>
                 <div class="user-order">
                     <p>Name: <?=$restaurantName?></p>
                 </div>
-            <?php }
-            if (sizeof($favoriteRestaurants) == 0) { ?>
-                <p>No plates in favorites, yet!</p>
+                <?php }
+                if (sizeof($favoriteRestaurants) == 0) { ?>
+                    <p>No restaurants owned.</p>
             <?php } ?>
             </div>
         </div>
             <?php } ?>
+    </div>
     <?php $error = 0; ?>
 <?php } ?>
