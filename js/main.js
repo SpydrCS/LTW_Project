@@ -119,46 +119,74 @@ function throttle(cb, delay = 1000) {
 //     }
 // }
 
-function new_func(num) {
-    if (num == 1) {
-        document.getElementById('my-profile-div').style.display = "flex";
-        document.getElementById('my-addresses-div').style.display = "none";
-        document.getElementById('my-orders-div').style.display = "none";
-        document.getElementById('my-favorites-div').style.display = "none";
-        document.getElementById('prof-btn').style.fontWeight = "bold";
-        document.getElementById('addr-btn').style.fontWeight = "normal";
-        document.getElementById('order-btn').style.fontWeight = "normal";
-        document.getElementById('fav-btn').style.fontWeight = "normal";
+function new_func(num, client) {
+    if(client ==1){
+        if (num == 1) {
+            document.getElementById('my-profile-div').style.display = "flex";
+            document.getElementById('my-addresses-div').style.display = "none";
+            document.getElementById('my-orders-div').style.display = "none";
+            document.getElementById('my-favorites-div').style.display = "none";
+            document.getElementById('prof-btn').style.fontWeight = "bold";
+            document.getElementById('addr-btn').style.fontWeight = "normal";
+            document.getElementById('order-btn').style.fontWeight = "normal";
+            document.getElementById('fav-btn').style.fontWeight = "normal";
+        }
+        else if (num == 2) {
+            document.getElementById('my-profile-div').style.display = "none";
+            document.getElementById('my-addresses-div').style.display = "flex";
+            document.getElementById('my-orders-div').style.display = "none";
+            document.getElementById('my-favorites-div').style.display = "none";
+            document.getElementById('prof-btn').style.fontWeight = "normal";
+            document.getElementById('addr-btn').style.fontWeight = "bold";
+            document.getElementById('order-btn').style.fontWeight = "normal";
+            document.getElementById('fav-btn').style.fontWeight = "normal";
+        }
+        else if (num == 3) {
+            document.getElementById('my-profile-div').style.display = "none";
+            document.getElementById('my-addresses-div').style.display = "none";
+            document.getElementById('my-orders-div').style.display = "flex";
+            document.getElementById('my-favorites-div').style.display = "none";
+            document.getElementById('prof-btn').style.fontWeight = "normal";
+            document.getElementById('addr-btn').style.fontWeight = "normal";
+            document.getElementById('order-btn').style.fontWeight = "bold";
+            document.getElementById('fav-btn').style.fontWeight = "normal";
+        }
+        else if (num == 4) {
+            document.getElementById('my-profile-div').style.display = "none";
+            document.getElementById('my-addresses-div').style.display = "none";
+            document.getElementById('my-orders-div').style.display = "none";
+            document.getElementById('my-favorites-div').style.display = "flex";
+            document.getElementById('prof-btn').style.fontWeight = "normal";
+            document.getElementById('addr-btn').style.fontWeight = "normal";
+            document.getElementById('order-btn').style.fontWeight = "normal";
+            document.getElementById('fav-btn').style.fontWeight = "bold";
+        }
     }
-    else if (num == 2) {
-        document.getElementById('my-profile-div').style.display = "none";
-        document.getElementById('my-addresses-div').style.display = "flex";
-        document.getElementById('my-orders-div').style.display = "none";
-        document.getElementById('my-favorites-div').style.display = "none";
-        document.getElementById('prof-btn').style.fontWeight = "normal";
-        document.getElementById('addr-btn').style.fontWeight = "bold";
-        document.getElementById('order-btn').style.fontWeight = "normal";
-        document.getElementById('fav-btn').style.fontWeight = "normal";
-    }
-    else if (num == 3) {
-        document.getElementById('my-profile-div').style.display = "none";
-        document.getElementById('my-addresses-div').style.display = "none";
-        document.getElementById('my-orders-div').style.display = "flex";
-        document.getElementById('my-favorites-div').style.display = "none";
-        document.getElementById('prof-btn').style.fontWeight = "normal";
-        document.getElementById('addr-btn').style.fontWeight = "normal";
-        document.getElementById('order-btn').style.fontWeight = "bold";
-        document.getElementById('fav-btn').style.fontWeight = "normal";
-    }
-    else if (num == 4) {
-        document.getElementById('my-profile-div').style.display = "none";
-        document.getElementById('my-addresses-div').style.display = "none";
-        document.getElementById('my-orders-div').style.display = "none";
-        document.getElementById('my-favorites-div').style.display = "flex";
-        document.getElementById('prof-btn').style.fontWeight = "normal";
-        document.getElementById('addr-btn').style.fontWeight = "normal";
-        document.getElementById('order-btn').style.fontWeight = "normal";
-        document.getElementById('fav-btn').style.fontWeight = "bold";
+    else{
+        if (num == 1) {
+            document.getElementById('my-profile-div').style.display = "flex";
+            document.getElementById('my-restaurants-div').style.display = "none";
+            document.getElementById('add-restaurants-div').style.display = "none";
+            document.getElementById('prof-btn').style.fontWeight = "bold";
+            document.getElementById('rest-btn').style.fontWeight = "normal";
+            document.getElementById('add-rest-btn').style.fontWeight = "normal";
+        }
+        else if (num == 2) {
+            document.getElementById('my-profile-div').style.display = "none";
+            document.getElementById('my-restaurants-div').style.display = "flex";
+            document.getElementById('add-restaurants-div').style.display = "none";
+            document.getElementById('prof-btn').style.fontWeight = "normal";
+            document.getElementById('rest-btn').style.fontWeight = "bold";
+            document.getElementById('add-rest-btn').style.fontWeight = "normal";
+        }
+        else if (num == 3) {
+            document.getElementById('my-profile-div').style.display = "none";
+            document.getElementById('my-restaurants-div').style.display = "none";
+            document.getElementById('add-restaurants-div').style.display = "flex";
+            document.getElementById('prof-btn').style.fontWeight = "normal";
+            document.getElementById('rest-btn').style.fontWeight = "normal";
+            document.getElementById('add-rest-btn').style.fontWeight = "bold";
+        }
     }
 }
 

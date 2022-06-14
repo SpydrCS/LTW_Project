@@ -24,10 +24,12 @@
 
     $db = getDatabaseConnection();
     $userExists = User::userExists($db, $username);
+    $client = 0;
 
     if ($userExists == 0) { // User does not exist
-        if($status == "client"){User::registerUser($db, $username, $password, $name, $age, $nif, $phone, $address, 1);}
-        else{User::registerUser($db, $username, $password, $name, $age, $nif, $phone, $address, 0);}
+        if($status == "client"){$client = 1;}
+        else{$client = 0;}
+        User::registerUser($db, $username, $password, $name, $age, $nif, $phone, $address, $client);
         $user = User::getUserByUsername($db, $username);
         $session = new Session();
         $session->setName($user->username);
