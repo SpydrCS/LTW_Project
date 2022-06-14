@@ -1,0 +1,21 @@
+## Features
+
+- [X] Create Owner Account or Costumer Account
+- [x] Login/Logout in an Owner/Costumer Account
+- [x] Edit Profile
+- [X] Listing Owned Restaurants in Profile
+- [x] Add Restaurant
+- [ ] Edit Restaurant
+- [ ] Add Dishes
+- [ ] Add Dish Photo
+- [x] List Reviews
+- [ ] Restaurant Owner Can Answer to Review
+- [x] List Customer Orders in Costumer's Profile
+- [X] List Orders Received in Restaurant Owner's Profile
+- [x] Change Order State
+- [ ] Search Restaurants
+- [ ] Order Dishes
+- [x] List My Orders
+- [x] Mark Restaurant as Favourite
+- [ ] Mark Dish as Favourite
+- [ ] Customer Can Leave a Review
