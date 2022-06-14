@@ -89,7 +89,6 @@
             <div class="category-name"><a href = "../pages/category.php?category=vegetarian">Vegetarian</a></div>
             <div class="category-name"><a href = "../pages/category.php?category=mexican">Mexican</a></div>
             <div class="category-name"><a href = "../pages/category.php?category=portuguese">Portuguese</a></div>
-            <div class="category-name"><a href = "../pages/category.php?category=ice-cream">Ice-Cream</a></div>
             <div class="category-name"><a href = "../pages/category.php?category=drinks">Drinks</a></div>
             <div class="category-name"><a href = "../pages/category.php?category=desserts">Desserts</a></div>
         </div>
