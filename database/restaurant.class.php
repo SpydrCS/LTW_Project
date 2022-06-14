@@ -131,6 +131,16 @@
             $stmt = $db->prepare('SELECT Review.idClient, Review.title, Review.comment, Review.grade, Review.submissonDate, Review.submissonHour, Review.idOwner, Review.answer, Pedido.idRestaurant
                                 FROM Review, Pedido
                                 WHERE (Review.idPedido=Pedido.id AND Pedido.idRestaurant =' . $id . ')');
+        static function addRestaurant(PDO $db, int $idUser, string $name, string $address, string $type) {
+            $stmt = $db->prepare("INSERT INTO Restaurant ('idUser', 'name', 'address', 'type') 
+                                VALUES ( ? , ? , ? , ?)"
+                                );
+            $stmt->execute(array($idUser,$name,$address,$type));
+        }
+
+        // static function getRestaurantComments(PDO $db, int $id) {
+        //     $stmt = $db->prepare('SELECT select Pedido.idRestaurant, Review.idPedido, Review.comment, Review.submissonDate, Review.submissonHour, Review.grade, Review.answer from Review,Pedido
+        //                         where (Review.idPedido=Pedido.id AND Pedido.idRestaurant=?)');
             
             $stmt->execute();
             $comments = array();

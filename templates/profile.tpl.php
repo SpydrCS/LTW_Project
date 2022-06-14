@@ -6,7 +6,7 @@
     require_once(__DIR__ . '/../database/restaurant.class.php');
 ?>
 
-<?php function drawTitles() { ?>
+<?php function drawTitles(PDO $db, User $user) { ?>
     <div class="max">
         <div class="main-titles">
             <a href="javascript:void(0)" onclick="new_func(1)">
@@ -15,39 +15,44 @@
                     <button type="button" class="ttl-btn" id="prof-btn" onclick="new_func(1)">My Profile</button>
                 </div>
             </a>
-            <?php if (1 == 1) { ?> <!-- User is a client -->
-                <a href="javascript:void(0)" onclick="new_func(2)">
+            <?php if ($user->client == 1) { ?> <!-- User is a client -->
+                <a href="javascript:void(0)" onclick="new_func(2,1)">
                     <div class="my-addresses flex">
                         <i class="material-icons">place</i>
-                        <button type="button" class="ttl-btn" id="addr-btn" onclick="new_func(2)">My Adresses</button>
+                        <button type="button" class="ttl-btn" id="addr-btn" onclick="new_func(2,1)">My Adresses</button>
                     </div>
                 </a>
+                <a href="javascript:void(0)" onclick="new_func(3,1)">
+                <div class="my-orders flex">
+                    <i class="material-icons">business_center</i>
+                    <button type="button" class="ttl-btn" id="order-btn" onclick="new_func(3,1)">My Orders</button>
+                </div>
+                </a>
+            <a href="javascript:void(0)" onclick="new_func(4,1)">
+                <div class="my-favorites flex">
+                    <i class="material-icons">star</i>
+                    <button type="button" class="ttl-btn" id="fav-btn" onclick="new_func(4,1)">My Favorites</button>
+                </div>
+            </a>
             <?php }
             else { ?>
-                <a href="javascript:void(0)" onclick="new_func(2)">
+                <a href="javascript:void(0)" onclick="new_func(2,0)">
                     <div class="my-addresses flex">
                         <i class="material-icons">building</i>
-                        <button type="button" class="ttl-btn" id="addr-btn" onclick="new_func(2)">My Restaurats</button>
+                        <button type="button" class="ttl-btn" id="rest-btn" onclick="new_func(2,0)">My Restaurants</button>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="new_func(3,0)">
+                    <div class="my-addresses flex">
+                        <i class="material-icons">building</i>
+                        <button type="button" class="ttl-btn" id="add-rest-btn" onclick="new_func(2,0)">New Restaurant</button>
                     </div>
                 </a>
             <?php } ?>
-                
-            <a href="javascript:void(0)" onclick="new_func(3)">
-                <div class="my-orders flex">
-                    <i class="material-icons">business_center</i>
-                    <button type="button" class="ttl-btn" id="order-btn" onclick="new_func(3)">My Orders</button>
-                </div>
-            </a>
-            <a href="javascript:void(0)" onclick="new_func(4)">
-                <div class="my-favorites flex">
-                    <i class="material-icons">star</i>
-                    <button type="button" class="ttl-btn" id="fav-btn" onclick="new_func(4)">My Favorites</button>
-                </div>
-            </a>
         </div>
 <?php } ?>
 
-<?php function drawMyProfile(PDO $db, User $user, array $userAddresses, array $userOrders, array $favoriteRestaurants, int $error) {
+<?php function drawMyProfile(PDO $db, User $user, array $userAddresses, array $userOrders, array $favoriteRestaurants, array $ownedRestaurants, int $error) {
     $userProfilePic = $user->profilePic;
     $userUsername = $user->username;
     $userPassword = $user->password;
@@ -56,7 +61,7 @@
     $userNIF = $user->nif;
     $userPhone = $user->phone;
     $userAddress = $user->address;
-    //$client = $user->client;
+    $client = $user->client;
 
     ?>
         <div class="my-profile-div center show" id="my-profile-div">
@@ -96,8 +101,7 @@
             </div>
         </div>
         <?php 
-            $user = User::getUser($db, $user->id);
-            if (1 == 1) { ?> <!-- User it's a client -->
+            if ($client == 1) { ?> <!-- User it's a client -->
                 <div class="my-addresses-div center hidden" id="my-addresses-div">
                     <div class="both">
                         <div class="new-address-div">
@@ -139,13 +143,9 @@
                         </div>
                     </div>
                 </div>
-            <?php }
-            else { ?> <!-- User it's not a client (owner) -->
-                
-            <?php } ?>
 
-        <div class="my-orders-div center hidden" id="my-orders-div">
-            <?php foreach ($userOrders as $order) { ?>
+                <div class="my-orders-div center hidden" id="my-orders-div">
+                <?php foreach ($userOrders as $order) { ?>
                 <?php $restaurantName = Restaurant::getRestaurantName($db, intval($order->idRestaurant)); ?>
                 <div class="user-order">
                     <p>Order <?=$order->id?> (<?=$order->submissonDate?> | <?=$order->submissonHour?>)</p>
@@ -170,6 +170,57 @@
             <?php } ?>
             </div>
         </div>
+            <?php }
+        else { ?> <!-- User it's not a client (owner) -->
+        <div class="my-restaurants-div center hidden" id="my-restaurants-div">
+            <div class="name">
+            <?php foreach ($ownedRestaurants as $restaurant) { ?>
+                <?php $restaurantName = Restaurant::getRestaurantName($db, intval($restaurant->id)); ?>
+                <div class="user-order">
+                    <p>Name: <?=$restaurantName?></p>
+                    <p>Type: <?=$restaurant->type?></p>
+                    <p>Address: <?=$restaurant->address?></p>
+                </div>
+            <?php } 
+            if (sizeof($ownedRestaurants) == 0) { ?>
+                <p>No restaurants owned!</p>
+            <?php } ?>
+            </div>
+        </div>
+        <div class="add-restaurants-div center hidden" id="add-restaurants-div">
+            <div class="name">
+
+                <form action="../actions/action_add_new_restaurant.php" method="post">
+                    <p><label for="name">Insert your restaurant name:</label></p>
+                    <input type="text" placeholder="name" name="name" class="diactivated"></p>
+                    <p><label for="address">Insert the restaurant's address:</label></p>
+                    <input type="text" placeholder="address" name="address" class="diactivated"></p>
+                    <p><label for="type">Choose the restaurant specialty:</label></p>
+                    <select id="type" name="type">
+                        <option value="burgers">Burgers</option>
+                        <option value="pizza">Pizza</option>
+                        <option value="sandwiches">Sandwiches</option>
+                        <option value="hot-dogs">Hot-Dogs</option>
+                        <option value="sushi">Sushi</option>
+                        <option value="soups">Soups</option>
+                        <option value="fried">Fried</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="portuguese">Portuguese</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="desserts">Desserts</option>
+                    </select>
+                    <button type="submit" class="btn-save-changes">Save changes</button>
+                </form>
+                <?php if ($error == 3) { ?>
+                    <p>Resturant added succesfully!</p>
+                <?php }
+                else if ($error == -2) { ?>
+                    <p>Please fill all the cells!</p>
+                <?php }?>
+            </div>
+        </div>
+            <?php } ?>
     </div>
     <?php $error = 0; ?>
 <?php } ?>
