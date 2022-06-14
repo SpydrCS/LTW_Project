@@ -89,15 +89,9 @@
             return $reviews;
         }
 
-        function save($db) {
-            //password change não está a trocar
-            $stmt = $db->prepare('UPDATE User SET name = ?,
-                                 username = ?,
-                                 phone = ?/*,
-                                 password = ?*/ 
-                                WHERE id = ?');
-      
-            $stmt->execute(array($this->name, $this->username, $this->phone, /*$this->$password,*/ $this->id));
+        function save(PDO $db) {
+            $stmt=$db->prepare("UPDATE User SET name=?,username=?,phone=?,password=? WHERE id=?");
+            $stmt->execute(array($this->name,$this->username, $this->phone, $this->password, $this->id));
         }
 
         static function saveAddress(PDO $db, int $id, string $newAddress) {
@@ -109,11 +103,11 @@
             }
         }
 
-        static function registerUser(PDO $db, string $username, string $password, string $name, int $age, int $nif, int $phone, string $address, string $client) {
+        static function registerUser(PDO $db, string $username, string $password, string $name, int $age, int $nif, int $phone, string $address) {
             $stmt = $db->prepare("INSERT INTO User ('username','profilePic','password','name','age','nif','phone','address','client') 
             VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ?)"
             );
-            $stmt->execute(array($username, "../images/profilePic.png", $password, $name, $age, $nif, $phone, $address, $client));
+            $stmt->execute(array($username, "../images/profilePic.png", $password, $name, $age, $nif, $phone, $address, 1));
         }
 
         static function userIsClient(PDO $db, int $userId) : int {
