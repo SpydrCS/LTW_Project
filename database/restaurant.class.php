@@ -22,8 +22,8 @@
             $restaurant = $stmt->fetch();
 
             return new Restaurant(
-                $restaurant['id'],
-                $restaurant['idUser'],
+                intval($restaurant['id']),
+                intval($restaurant['idUser']),
                 $restaurant['name'],
                 $restaurant['address'],
                 $restaurant['type']
@@ -38,8 +38,8 @@
 
             while ($restaurant = $stmt->fetch()) {
                 $allRestaurants[] = new Restaurant(
-                    $restaurant['id'],
-                    $restaurant['idUser'],
+                    intval($restaurant['id']),
+                    intval($restaurant['idUser']),
                     $restaurant['name'],
                     $restaurant['address'],
                     $restaurant['type']
@@ -59,8 +59,8 @@
 
             while ($restaurant = $stmt->fetch()) {
                 $categoryRestaurants[] = new Restaurant(
-                    $restaurant['id'],
-                    $restaurant['idUser'],
+                    intval($restaurant['id']),
+                    intval($restaurant['idUser']),
                     $restaurant['name'],
                     $restaurant['address'],
                     $restaurant['type']
@@ -116,8 +116,8 @@
 
             while ($restaurant = $stmt->fetch()) {
                 $userRestaurants[] = new Restaurant(
-                    $restaurant['id'],
-                    $restaurant['idUser'],
+                    intval($restaurant['id']),
+                    intval($restaurant['idUser']),
                     $restaurant['name'],
                     $restaurant['address'],
                     $restaurant['type']

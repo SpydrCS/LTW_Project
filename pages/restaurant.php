@@ -10,6 +10,8 @@
   $session = new Session();
 ?>
   <link rel="stylesheet" href="../css/common.css"> <!-- Style of the header and the footer -->
+  <link rel="stylesheet" href="../css/restaurant.css"> <!-- Style of main body -->
+  <script src="../js/main.js"></script>
 <?php
   $db = getDatabaseConnection();
   

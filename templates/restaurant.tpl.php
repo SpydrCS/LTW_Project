@@ -8,18 +8,23 @@
     $restaurantGrade = Restaurant::getRestaurantGrade($db, intval($restaurant->id));
     $numClassifications = Restaurant::getNumberClassifications($db, intval($restaurant->id))
     ?>
-    <img src="../images/restaurantImg.png">
-    <h2><?=$restaurant->name?></h2>
-    <div class="restaurant-info">
-        <h4><?=$restaurantGrade?> (<?=$numClassifications?> classifications) <a href="../pages/comments.php?id=<?php echo $restaurant->id?>">More informations</a></h4s>
+    <img src="../images/restaurantImg.png" class="rest-img">
+    <h1 class="rest-ttl-name"><?=$restaurant->name?></h1>
+    <div class="restaurant-grade">
+        <span><?=$restaurantGrade?></span>
+        <i class="material-icons staring">star</i>
+        <span>(<?=$numClassifications?> classifications)</span>
+        <i class="material-icons more-horiz">more_horiz</i>
+        <span><a class="more-info" href="../pages/comments.php?id=<?php echo $restaurant->id?>">More informations</a></span>
     </div>
 
-    <section class="main-titles">
-        <h2>Plates</h3>
-        <h2>Drinks</h3>
-        <h2>Desserts</h3>
-        <h2>Extras</h3>
-    </section>
+    <div class="main-body">
+        <div class="main-titles">
+            <button class="ttl-btn" id="ttl-btn-1" onclick="scroll_target(1)"><h2>Plates</h2></button>
+            <button class="ttl-btn" id="ttl-btn-2" onclick="scroll_target(2)"><h2>Drinks</h2></button>
+            <button class="ttl-btn" id="ttl-btn-3" onclick="scroll_target(3)"><h2>Desserts</h2></button>
+            <button class="ttl-btn" id="ttl-btn-4" onclick="scroll_target(4)"><h2>Extras</h2></button>
+        </div>
 
     <?php $foodPlates = array(); $drinks = array(); $desserts = array(); $extras = array();
 
@@ -38,9 +43,10 @@
         }
     } ?>
 
-    <section class="scroll-menu">
-        <section class="plates">
-            <h3 id="scroll-title">Plates</h3>
+    <div class="scroll-menu">
+        <section class="plates pd3">
+            <h3 id="plates-title">Plates</h3>
+            <nav class="cmn">
             <?php
                 if (sizeof($foodPlates) > 0) {
                     foreach($foodPlates as $plate) {
@@ -80,7 +86,9 @@
                                 <p><?=$plate->name?></p>
                             </article>
                         <?php } ?>
-                <?php }
+                <?php } ?>
+                </nav>
+                <?php
                 }
                 else {
                     echo '<p> No plates available! </p>';
@@ -88,8 +96,9 @@
             ?>
         </section>
 
-        <section class="drinks">
-            <h3 id="scroll-title">Drinks</h3>
+        <section class="drinks pd3">
+            <h3 id="drinks-title">Drinks</h3>
+            <nav class="cmn">
             <?php
                 if (sizeof($drinks) > 0) {
                     foreach($drinks as $drink) { ?>
@@ -100,7 +109,9 @@
                             </section>
                             <p><?=$drink->name?></p>
                         </article>
-                <?php }
+                <?php } ?>
+                </nav>
+                <?php
                 }
                 else {
                     echo '<p> No drinks available! </p>';
@@ -108,8 +119,9 @@
             ?>
         </section>
 
-        <section class="desserts">
-            <h3 id="scroll-title">Desserts</h3>
+        <section class="desserts pd3">
+            <h3 id="desserts-title">Desserts</h3>
+            <nav class="cmn">
             <?php
                 if (sizeof($desserts) > 0) {
                     foreach($desserts as $dessert) { ?>
@@ -120,7 +132,9 @@
                             </section>
                             <p><?=$dessert->name?></p>
                         </article>
-                <?php }
+                <?php } ?>
+                    </nav>
+                <?php
                 }
                 else {
                     echo '<p> No desserts available! </p>';
@@ -128,8 +142,9 @@
             ?>
         </section>
 
-        <section class="extras">
-            <h3 id="scroll-title">Extras</h3>
+        <section class="extras pd3">
+            <h3 id="extra-title">Extras</h3>
+            <nav class="cmn">
             <?php
             if (sizeof($extras) > 0) {
                 foreach($extras as $extra) { ?>
@@ -139,14 +154,17 @@
                             <p><?=$extra->price?> €</p>
                         </section>
                     </article>
-            <?php }
+            <?php } ?>
+            </nav>
+            <?php
             }
             else {
                 echo '<p> No extras available! </p>';
             }
         ?>
         </section>
-    </section>
+        </div>
+    </div>
 <?php } ?>
 
 <?php function restaurantDiv(Restaurant $restaurant) { ?>

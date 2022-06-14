@@ -161,3 +161,34 @@ function new_func(num) {
         document.getElementById('fav-btn').style.fontWeight = "bold";
     }
 }
+
+function scroll_target(num) {
+    if (num == 1) {
+        document.getElementById('ttl-btn-1').style.textDecoration = "underline";
+        document.getElementById('ttl-btn-2').style.textDecoration = "none";
+        document.getElementById('ttl-btn-3').style.textDecoration = "none";
+        document.getElementById('ttl-btn-4').style.textDecoration = "none";
+        document.getElementById('plates-title').scrollIntoView({block: "start", behavior:"smooth"});
+    }
+    else if (num == 2) {
+        document.getElementById('ttl-btn-1').style.textDecoration = "none";
+        document.getElementById('ttl-btn-2').style.textDecoration = "underline";
+        document.getElementById('ttl-btn-3').style.textDecoration = "none";
+        document.getElementById('ttl-btn-4').style.textDecoration = "none";
+        document.getElementById('drinks-title').scrollIntoView({block: "start", behavior:"smooth"});
+    }
+    else if (num == 3) {
+        document.getElementById('ttl-btn-1').style.textDecoration = "none";
+        document.getElementById('ttl-btn-2').style.textDecoration = "none";
+        document.getElementById('ttl-btn-3').style.textDecoration = "underline";
+        document.getElementById('ttl-btn-4').style.textDecoration = "none";
+        document.getElementById('desserts-title').scrollIntoView({block: "start", behavior:"smooth"});
+    }
+    else if (num == 4) {
+        document.getElementById('ttl-btn-1').style.textDecoration = "none";
+        document.getElementById('ttl-btn-2').style.textDecoration = "none";
+        document.getElementById('ttl-btn-3').style.textDecoration = "none";
+        document.getElementById('ttl-btn-4').style.textDecoration = "underline";
+        document.getElementById('extra-title').scrollIntoView({block: "start", behavior:"smooth"});
+    }
+}
