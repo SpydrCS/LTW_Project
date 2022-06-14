@@ -75,9 +75,9 @@
         }
 
         static function getOrdersByOwner(PDO $db, int $id) : array {
-            $stmt = $db->prepare("SELECT DISTINCT Pedido.id, Restaurant.idUser as idOwner, Pedido.idUser, Pedido.state, Pedido.delieverAddress, Pedido.submissonDate, Pedido.submissonHour FROM Pedido, Restaurant WHERE (Pedido.idRestaurant=idOwner and idOwner=?)");
-            $stmt->execute(array($id)); 
-            $order = array();
+            $stmt = $db->prepare("SELECT DISTINCT Pedido.id, Restaurant.id as idRestaurant, Restaurant.idUser as idOwner, Pedido.idUser, Pedido.state, Pedido.delieverAddress, Pedido.submissonDate, Pedido.submissonHour FROM Pedido, Restaurant WHERE (Pedido.idRestaurant=idOwner and idOwner=" . $id .")");
+            $stmt->execute(); 
+            $orders = array();
             
             while ($order = $stmt->fetch()) {
                 $orders[] = new Pedido(
