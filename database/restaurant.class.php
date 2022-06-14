@@ -127,22 +127,19 @@
             return $userRestaurants;
         }
 
-        // static function getRestaurantComments(PDO $db, int $id) {
-        //     $stmt = $db->prepare('SELECT select Pedido.idRestaurant, Review.idPedido, Review.comment, Review.submissonDate, Review.submissonHour, Review.grade, Review.answer from Review,Pedido
-        //                         where (Review.idPedido=Pedido.id AND Pedido.idRestaurant=?)');
+        static function getRestaurantComments(PDO $db, int $id) : array {
+            $stmt = $db->prepare('SELECT Review.idClient, Review.title, Review.comment, Review.grade, Review.submissonDate, Review.submissonHour, Review.idOwner, Review.answer, Pedido.idRestaurant
+                                FROM Review, Pedido
+                                WHERE (Review.idPedido=Pedido.id AND Pedido.idRestaurant =' . $id . ')');
             
-        //     $stmt->execute(array($id));
-        //     $comments = array();
+            $stmt->execute();
+            $comments = array();
 
-        //     while ($comment = $stmt->fetch()) {
-        //         $plates = new Plate(
-        //             $plate['id'],
-        //             $plate['idRestaurant'],
-        //             $plate['name'],
-        //             $plate['category'],
-        //             $plate['price']
-        //         );
-        //     }
-        // }
+            while ($comment = $stmt->fetch()) {
+                $comments[] = $comment;
+            }
+
+            return $comments;
+        }
     }
 ?>

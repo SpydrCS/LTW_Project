@@ -11,7 +11,7 @@
     <img src="../images/restaurantImg.png">
     <h2><?=$restaurant->name?></h2>
     <div class="restaurant-info">
-        <h4><?=$restaurantGrade?> (<?=$numClassifications?> classifications) <a href="../pages/comments.php?id=<?php echo $restaurant->id?>">More informations</a></h4s>
+        <h4><?=$restaurantGrade?> (<?=$numClassifications?> classifications) <a href="../pages/restaurantReviews.php?restaurantId=<?=$restaurant->id?>">More informations</a></h4>
     </div>
 
     <section class="main-titles">
