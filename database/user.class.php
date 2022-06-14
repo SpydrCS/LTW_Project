@@ -109,11 +109,11 @@
             }
         }
 
-        static function registerUser(PDO $db, string $username, string $password, string $name, int $age, int $nif, int $phone, string $address) {
+        static function registerUser(PDO $db, string $username, string $password, string $name, int $age, int $nif, int $phone, string $address, string $client) {
             $stmt = $db->prepare("INSERT INTO User ('username','profilePic','password','name','age','nif','phone','address','client') 
             VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ?)"
             );
-            $stmt->execute(array($username, "../images/profilePic.png", $password, $name, $age, $nif, $phone, $address, 1));
+            $stmt->execute(array($username, "../images/profilePic.png", $password, $name, $age, $nif, $phone, $address, $client));
         }
 
         static function userIsClient(PDO $db, int $userId) : int {
