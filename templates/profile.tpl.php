@@ -42,6 +42,12 @@
                         <button type="button" class="ttl-btn" id="rest-btn" onclick="new_func(2,0)">My Restaurants</button>
                     </div>
                 </a>
+                <a href="javascript:void(0)" onclick="new_func(3,0)">
+                    <div class="my-addresses flex">
+                        <i class="material-icons">building</i>
+                        <button type="button" class="ttl-btn" id="add-rest-btn" onclick="new_func(2,0)">New Restaurant</button>
+                    </div>
+                </a>
             <?php } ?>
         </div>
 <?php } ?>
@@ -177,6 +183,32 @@
                 if (sizeof($favoriteRestaurants) == 0) { ?>
                     <p>No restaurants owned.</p>
             <?php } ?>
+            </div>
+        </div>
+        <div class="add-restaurants-div center hidden" id="add-restaurants-div">
+            <div class="name">
+                <form action=<?="../actions/action_add_new_restaurant.php"?> method="post">
+                    <p><label for="restaurant-name">Insert your restaurant name:</label></p>
+                    <input type="text" placeholder="Name" name="new-restaurant" class="diactivated"></p>
+                    <p><label for="restaurant-address">Insert the restaurant's address:</label></p>
+                    <input type="text" placeholder="Address" name="new-restaurant" class="diactivated"></p>
+                    <p><label for="restaurant-type">Choose the restaurant specialty:</label></p>
+                    <select id="type" name = "type">
+                        <option value="burgers">Burgers</option>
+                        <option value="pizza">Pizza</option>
+                        <option value="sandwiches">Sandwiches</option>
+                        <option value="hot-dogs">Hot-Dogs</option>
+                        <option value="sushi">Sushi</option>
+                        <option value="soups">Soups</option>
+                        <option value="fried">Fried</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="portuguese">Portuguese</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="desserts">Desserts</option>
+                    </select>
+                    <button type="submit" class="btn-save-changes">Save changes</button>
+                </form>
             </div>
         </div>
             <?php } ?>

@@ -127,6 +127,13 @@
             return $userRestaurants;
         }
 
+        static function addRestaurant(PDO $db, int $idUser, string $name, string $address, string $type) {
+            $stmt = $db->prepare("INSERT INTO Restaurant ('idUser', 'name', 'address', 'type') 
+            VALUES ( ? , ? , ? , ?)"
+            );
+            $stmt->execute(array($idUser,$name,$address,$type));
+        }
+
         // static function getRestaurantComments(PDO $db, int $id) {
         //     $stmt = $db->prepare('SELECT select Pedido.idRestaurant, Review.idPedido, Review.comment, Review.submissonDate, Review.submissonHour, Review.grade, Review.answer from Review,Pedido
         //                         where (Review.idPedido=Pedido.id AND Pedido.idRestaurant=?)');

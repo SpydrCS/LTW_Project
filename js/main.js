@@ -166,14 +166,26 @@ function new_func(num, client) {
         if (num == 1) {
             document.getElementById('my-profile-div').style.display = "flex";
             document.getElementById('my-restaurants-div').style.display = "none";
+            document.getElementById('add-restaurants-div').style.display = "none";
             document.getElementById('prof-btn').style.fontWeight = "bold";
             document.getElementById('rest-btn').style.fontWeight = "normal";
+            document.getElementById('add-rest-btn').style.fontWeight = "normal";
         }
         else if (num == 2) {
             document.getElementById('my-profile-div').style.display = "none";
             document.getElementById('my-restaurants-div').style.display = "flex";
+            document.getElementById('add-restaurants-div').style.display = "none";
             document.getElementById('prof-btn').style.fontWeight = "normal";
             document.getElementById('rest-btn').style.fontWeight = "bold";
+            document.getElementById('add-rest-btn').style.fontWeight = "normal";
+        }
+        else if (num == 3) {
+            document.getElementById('my-profile-div').style.display = "none";
+            document.getElementById('my-restaurants-div').style.display = "none";
+            document.getElementById('add-restaurants-div').style.display = "flex";
+            document.getElementById('prof-btn').style.fontWeight = "normal";
+            document.getElementById('rest-btn').style.fontWeight = "normal";
+            document.getElementById('add-rest-btn').style.fontWeight = "bold";
         }
     }
 }
